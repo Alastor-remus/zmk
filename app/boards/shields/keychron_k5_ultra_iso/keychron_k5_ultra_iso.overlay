@@ -221,7 +221,7 @@
     // led_numlock: led_numlock{
     //     compatible = "gpio-leds";
     //     led1 {
-    //         gpios = <&gpioa 27 GPIO_ACTIVE_LOW>;  //p2_6
+    //         gpios = <&gpioa 27 GPIO_ACTIVE_HIGH>;  //p2_6
     //     };
         
     // };
