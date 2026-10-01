@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure git safe directory
+        run: git config --global --add safe.directory /__w/zmk/zmk
+
       - name: Initialize workspace (west init)
         run: west init -l app
 
@@ -26,13 +29,13 @@ jobs:
         run: west zephyr-export
 
       - name: Build firmware
-        run: west build -s app -p -b keychron -- -DSHIELD=keychron_k5_ultra_iso
+        run: west build -s app -d app/build -p -b keychron -- -DSHIELD=keychron_k5_ultra_iso
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
           name: keychron_k5_ultra_iso_firmware
           path: |
-            build/zephyr/*.bin
-            build/zephyr/*.hex
-            build/zephyr/*.uf2
+            app/build/zephyr/*.bin
+            app/build/zephyr/*.hex
+            app/build/zephyr/*.uf2
